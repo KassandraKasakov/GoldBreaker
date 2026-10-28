@@ -1,4 +1,11 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <conio.h>
 #include <windows.h>
 
 #include "Tiles.h"
@@ -8,24 +15,22 @@
 
 int main()
 {
+	srand(time(0));
+
     Player player;
 
-	int map[70] = {
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0
-	};
+	Map map;
+	
+	map = CreateMap();
+
+
 
     DisplayMap(map, player);
     player.DisplayStats();
 
 	while (true)
 	{
-		player.MovePlayer();
+		player.MovePlayer(map);
 		system("cls");
 		DisplayMap(map, player);
 		player.DisplayStats();

@@ -1,13 +1,16 @@
-#include "Tiles.h"
-#include "Map.h"
-#include "Player.h"
-
 #include <iostream>
-#include <windows.h>
-#include <conio.h>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <string>
 #include <chrono>
 #include <thread>
+#include <conio.h>
+#include <windows.h>
 
+#include "Map.h"
+#include "Tiles.h"
+#include "Player.h"
 
 
 void Player::DisplayStats()
@@ -18,6 +21,8 @@ void Player::DisplayStats()
 
 	SetConsoleTextAttribute(hConsole, 15);
 	std::cout << "Player stats :" << std::endl;
+	SetConsoleTextAttribute(hConsole, 8);
+	std::cout << "Coords : " << x << ' ' << y << std::endl;
 	SetConsoleTextAttribute(hConsole, 12);
 	std::cout << "Health : " << health << std::endl;
 	SetConsoleTextAttribute(hConsole, 6);
@@ -28,6 +33,10 @@ void Player::DisplayStats()
 
 void Player::ShowName()
 {
+	HANDLE  hConsole;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	SetConsoleTextAttribute(hConsole, 14);
 	std::cout << name << ' ';
 }
 
@@ -56,9 +65,9 @@ void Player::AddGold(int goldAmount)
 	gold += goldAmount;
 }
 
-bool Player::IsHere(int mapX, int mapY)
+bool Player::IsHere(int levelX, int levelY)
 {
-	return mapX == x && mapY == y;
+	return levelX == x && levelY == y;
 }
 
 void Player::SetCoords(int newX, int newY)
@@ -68,13 +77,30 @@ void Player::SetCoords(int newX, int newY)
 }
 
 
-void Player::MovePlayer()
+void Player::MovePlayer(Map level)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
+
+	if (y == 7)
+	{
+		MoveUp(level);
+	}
+	else if (!IsBlockHere(x, y+1, level))
+	{
+		Fall();
+	}
+	else
+	{
+		MoveSide(level);
+	}
+	
+}
+
+void Player::MoveSide(Map level)
+{
 	char imput = _getch();
 	int xDir = 0;
-	int yDir = 0;
 
 	switch (imput)
 	{
@@ -84,25 +110,24 @@ void Player::MovePlayer()
 	case 'q': // Left
 		xDir = -1;
 		break;
-	case 's': // Down
-		yDir = 1;
-		break;
 	}
 
 	int newX = x + xDir;
-	int newY = y + yDir;
 
-	if (IsInMap(newX, newY))
+	if (IsInMap(newX, y) && !IsBlockHere(newX, y, level))
 	{
-		SetCoords(newX, newY);
-		MoveUp();
+		SetCoords(newX, y);
 	}
 }
 
-void Player::MoveUp()
+
+void Player::MoveUp(Map level)
 {
-	if (y == 7)
-	{
-		SetCoords(x, 1);
-	}
+	SetCoords(x, 1);
+	level = CreateMap();
+}
+
+void Player::Fall()
+{
+	SetCoords(x, y+1);
 }

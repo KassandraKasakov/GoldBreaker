@@ -1,5 +1,17 @@
 #pragma once
 
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <conio.h>
+#include <windows.h>
+
+#include "Tiles.h"
+#include "Map.h"
 
 class Player
 {
@@ -10,7 +22,7 @@ private:
 	int maxHealth = 3;
 	int gold = 0;
 
-	int x = 0;
+	int x = 3;
 	int y = 0;
 public:
 	void DisplayStats();
@@ -24,8 +36,14 @@ public:
 	void AddGold(int goldAmount);
 
 	// Map Gestion
-	bool IsHere(int mapX, int mapY);
+	bool IsHere(int levelX, int levelY);
 	void SetCoords(int x, int y);
-	void MovePlayer();
-	void MoveUp();
+
+	// Movements
+	void MovePlayer(Map level);
+	void MoveSide(Map level);
+	void MoveUp(Map level);
+	void Fall();
+
+	// Dig
 };

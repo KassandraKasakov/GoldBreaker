@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="GoldBreaker/GoldBreaker.vcxproj" />
+  <Project Path="GoldBreaker/GoldBreaker.vcxproj" Id="f597a42a-0fd7-4dfc-b067-e80ca77f944b" />
 </Solution>
