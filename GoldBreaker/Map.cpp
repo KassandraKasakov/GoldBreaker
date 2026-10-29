@@ -10,7 +10,6 @@
 
 #include "Tiles.h"
 #include "Map.h"
-#include "Player.h"
 
 
 
@@ -30,32 +29,6 @@ bool IsInMap(int x, int y)
 		return false;
 	}
 	return true;
-}
-
-void DisplayMap(Map map, Player player)
-{
-
-	HANDLE  hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	for (int y = 0; y < 10; ++y) {
-		for (int x = 0; x < 7; ++x) {
-
-			int index = GetCell(x, y);
-
-			if (player.IsHere(x, y)) // Detects if the player is here
-			{
-				player.ShowName();
-			}
-			else {
-				SetConsoleTextAttribute(hConsole, GetTileFromPos(x, y, map).color);
-				std::cout << GetTileFromPos(x, y, map).name << ' '; // La ligne ultime ?
-			}
-
-		}
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
 }
 
 Map CreateMap()
@@ -87,11 +60,11 @@ Map CreateMap()
 	// Setting the map tiles
 	while (std::getline(chunk, line)) {
 
-		for (int i = 0;i < 10;i++) {
+		for (int i = 0;i < 7;i++) {
 
 			n++;
 
-			for (int t = 0; t < 7; t++) {
+			for (int t = 0; t < 3; t++) {
 				if (line[i] == AllTiles[t].name) {
 					level.data[n] = t;
 				}

@@ -77,12 +77,12 @@ void Player::SetCoords(int newX, int newY)
 }
 
 
-void Player::MovePlayer(Map level)
+void Player::MovePlayer(Map& level)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
 
-	if (y == 7)
+	if (y == 9)
 	{
 		MoveUp(level);
 	}
@@ -121,9 +121,9 @@ void Player::MoveSide(Map level)
 }
 
 
-void Player::MoveUp(Map level)
+void Player::MoveUp(Map& level)
 {
-	SetCoords(x, 1);
+	SetCoords(x, 0);
 	level = CreateMap();
 }
 

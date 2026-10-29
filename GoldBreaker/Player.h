@@ -10,7 +10,6 @@
 #include <conio.h>
 #include <windows.h>
 
-#include "Tiles.h"
 #include "Map.h"
 
 class Player
@@ -40,9 +39,9 @@ public:
 	void SetCoords(int x, int y);
 
 	// Movements
-	void MovePlayer(Map level);
+	void MovePlayer(Map& level);
 	void MoveSide(Map level);
-	void MoveUp(Map level);
+	void MoveUp(Map& level);
 	void Fall();
 
 	// Dig

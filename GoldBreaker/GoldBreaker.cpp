@@ -12,6 +12,32 @@
 #include "Map.h"
 #include "Player.h"
 
+void DisplayMap(Map map, Player player)
+{
+
+	HANDLE  hConsole;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	for (int y = 0; y < 10; ++y) {
+		for (int x = 0; x < 7; ++x) {
+
+			int index = GetCell(x, y);
+
+			if (player.IsHere(x, y)) // Detects if the player is here
+			{
+				player.ShowName();
+			}
+			else {
+				SetConsoleTextAttribute(hConsole, GetTileFromPos(x, y, map).color);
+				std::cout << GetTileFromPos(x, y, map).name << ' '; // La ligne ultime ?
+			}
+
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 
 int main()
 {

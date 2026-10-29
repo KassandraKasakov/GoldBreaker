@@ -11,7 +11,6 @@
 #include <windows.h>
 
 #include "Map.h"
-#include "Player.h"
 
 enum Tile_Type
 {
