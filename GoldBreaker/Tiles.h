@@ -22,17 +22,22 @@ enum Tile_Type
 struct Tile {
     char name;
     int color;
+    bool walkable = true;
     int durability = 1;
     int gold = 0;
 };
 
 // Tiles
-const Tile air = { ' ', 1, 0, 0 };
-const Tile wall = { '#', 12, 999, 0 };
-const Tile dirt = { '#', 15, 1, 0 };
+const Tile air = { ' ', 1, true, 0, 0 };
+const Tile wall = { '#', 12, false, 999, 0 };
+const Tile dirt = { '%', 15, true, 1, 0 };
 
 Tile const AllTiles[3] = { air, wall, dirt };
 
 Tile GetTileFromPos(int x, int y, Map level);
 
 bool IsBlockHere(int x, int y, Map level);
+
+bool IsBlockWalkable(int x, int y, Map level);
+
+void LoseDurability(int x, int y, Map& level);

@@ -36,7 +36,7 @@ Map CreateMap()
 	Map level;
 
 	// Create a random chunk path
-	int random = rand() % 3 + 1; // random number between 1 and 3
+	int random = rand() % 5 + 1; // random number between 1 and 3
 
 	std::string path = "chunks/";
 	path.append(std::to_string(random));
@@ -77,4 +77,10 @@ Map CreateMap()
 	chunk.close();
 
 	return level;
+}
+
+void ChangeTileInMap(int x, int y, Map level)
+{
+	int cell_pos = GetCell(x, y);
+	int cell_id = level.data[cell_pos];
 }

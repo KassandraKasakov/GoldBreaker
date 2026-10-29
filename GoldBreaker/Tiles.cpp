@@ -26,3 +26,15 @@ bool IsBlockHere(int x, int y, Map level)
 {
 	return GetTileFromPos(x, y, level).name != ' ';
 }
+
+bool IsBlockWalkable(int x, int y, Map level)
+{
+	return GetTileFromPos(x, y, level).walkable != false;
+}
+
+void LoseDurability(int x, int y, Map& level)
+{
+	int cell_pos = GetCell(x, y);
+	int cell_id = level.data[cell_pos];
+	cell_id = Air;
+}

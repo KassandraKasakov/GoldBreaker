@@ -101,6 +101,7 @@ void Player::MoveSide(Map level)
 {
 	char imput = _getch();
 	int xDir = 0;
+	int yDir = 0;
 
 	switch (imput)
 	{
@@ -110,13 +111,19 @@ void Player::MoveSide(Map level)
 	case 'q': // Left
 		xDir = -1;
 		break;
+	case 's':
+		yDir = 1;
 	}
 
 	int newX = x + xDir;
+	int newY = y + yDir;
 
-	if (IsInMap(newX, y) && !IsBlockHere(newX, y, level))
+	if (IsBlockWalkable(newX, newY, level))
 	{
-		SetCoords(newX, y);
+		if (IsInMap(newX, y) && !IsBlockHere(newX, newY, level))
+		{
+			SetCoords(newX, y);
+		}
 	}
 }
 
@@ -124,7 +131,7 @@ void Player::MoveSide(Map level)
 void Player::MoveUp(Map& level)
 {
 	SetCoords(x, 0);
-	level = CreateMap();
+	level = CreateMap(); // Load new chunk
 }
 
 void Player::Fall()

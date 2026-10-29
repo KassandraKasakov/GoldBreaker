@@ -43,6 +43,4 @@ public:
 	void MoveSide(Map level);
 	void MoveUp(Map& level);
 	void Fall();
-
-	// Dig
 };
