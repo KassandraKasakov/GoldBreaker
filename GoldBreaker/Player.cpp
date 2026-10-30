@@ -1,3 +1,5 @@
+#include "Player.h"
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -10,7 +12,6 @@
 
 #include "Map.h"
 #include "Tiles.h"
-#include "Player.h"
 
 
 void Player::DisplayStats()

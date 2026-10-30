@@ -44,7 +44,6 @@ bool IsBlockHere(int x, int y, Map level);
 bool IsBlockWalkable(int x, int y, Map level);
 
 // Damaged Tiles
-std::vector<Tile> damagedTiles = {};
 
 
 bool IsTileDamaged(int x, int y);

@@ -1,3 +1,5 @@
+#include "Tiles.h"
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -8,9 +10,12 @@
 #include <conio.h>
 #include <windows.h>
 
-#include "Tiles.h"
 #include "Map.h"
 #include "Player.h"
+
+
+std::vector<Tile> damagedTiles = {};
+
 
 
 Tile GetTileFromPos(int x, int y, Map level)

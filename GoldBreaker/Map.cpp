@@ -1,3 +1,5 @@
+#include "Map.h"
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -9,7 +11,6 @@
 #include <windows.h>
 
 #include "Tiles.h"
-#include "Map.h"
 
 
 
