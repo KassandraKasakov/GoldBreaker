@@ -23,5 +23,3 @@ int GetCell(int x, int y);
 bool IsInMap(int x, int y);
 
 Map CreateMap();
-
-void ChangeTileInMap(int x, int y, Map level);

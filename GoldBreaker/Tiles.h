@@ -9,6 +9,7 @@
 #include <thread>
 #include <conio.h>
 #include <windows.h>
+#include <vector>
 
 #include "Map.h"
 
@@ -25,6 +26,8 @@ struct Tile {
     bool walkable = true;
     int durability = 1;
     int gold = 0;
+    int x;
+    int y;
 };
 
 // Tiles
@@ -40,4 +43,14 @@ bool IsBlockHere(int x, int y, Map level);
 
 bool IsBlockWalkable(int x, int y, Map level);
 
-void LoseDurability(int x, int y, Map& level);
+// Damaged Tiles
+std::vector<Tile> damagedTiles = {};
+
+
+bool IsTileDamaged(int x, int y);
+
+void AddDamagedTile(int x, int y);
+
+void DamageTile(int tile_id);
+
+void RemoveDamagedTile(int tile_id);

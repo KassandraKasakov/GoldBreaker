@@ -78,9 +78,3 @@ Map CreateMap()
 
 	return level;
 }
-
-void ChangeTileInMap(int x, int y, Map level)
-{
-	int cell_pos = GetCell(x, y);
-	int cell_id = level.data[cell_pos];
-}
