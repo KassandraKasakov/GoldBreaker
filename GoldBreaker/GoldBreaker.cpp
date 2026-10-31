@@ -29,7 +29,7 @@ void DisplayMap(Map map, Player player)
 			}
 			else {
 				SetConsoleTextAttribute(hConsole, GetTileFromPos(x, y, map).color);
-				std::cout << GetTileFromPos(x, y, map).name << ' '; // La ligne ultime ?
+				std::cout << GetTileFromPos(x, y, map).name_Display << ' '; // La ligne ultime ?
 			}
 
 		}

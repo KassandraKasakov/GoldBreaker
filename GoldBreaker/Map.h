@@ -15,7 +15,7 @@
 struct Map {
     int width = 7;
     int height = 10;
-    int* data = new int[width * height];
+    int* data;
 };
 
 int GetCell(int x, int y);
@@ -23,3 +23,5 @@ int GetCell(int x, int y);
 bool IsInMap(int x, int y);
 
 Map CreateMap();
+
+void ChangeTileToAir(Map level, int x, int y);

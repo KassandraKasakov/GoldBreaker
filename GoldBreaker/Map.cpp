@@ -65,8 +65,8 @@ Map CreateMap()
 
 			n++;
 
-			for (int t = 0; t < 3; t++) {
-				if (line[i] == AllTiles[t].name) {
+			for (int t = 0; t < TileNumber; t++) {
+				if (line[i] == AllTiles[t].name_Parser) {
 					level.data[n] = t;
 				}
 			}
@@ -78,4 +78,10 @@ Map CreateMap()
 	chunk.close();
 
 	return level;
+}
+
+void ChangeTileToAir(Map level, int x, int y)
+{
+	int index = GetCell(x, y);
+	level.data[index] = Air;
 }

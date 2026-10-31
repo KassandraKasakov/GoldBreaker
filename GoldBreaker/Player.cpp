@@ -63,7 +63,7 @@ void Player::Heal(int pv)
 
 void Player::AddGold(int goldAmount)
 {
-	gold += goldAmount;
+	gold += goldAmount;	
 }
 
 bool Player::IsHere(int levelX, int levelY)
@@ -112,18 +112,29 @@ void Player::MoveSide(Map level)
 	case 'q': // Left
 		xDir = -1;
 		break;
-	case 's':
+	case 's': // Down
 		yDir = 1;
+		break;
+	case 'z': // Up
+		yDir = -1;
+		break;
 	}
 
 	int newX = x + xDir;
 	int newY = y + yDir;
 
-	if (IsBlockWalkable(newX, newY, level))
+	if (IsBlockHere(newX, newY, level))
 	{
-		if (IsInMap(newX, y) && !IsBlockHere(newX, newY, level))
+		Dig(level, newX, newY);
+	}
+	else
+	{
+		if (IsBlockWalkable(newX, newY, level))
 		{
-			SetCoords(newX, y);
+			if (IsInMap(newX, y) && !IsBlockHere(newX, newY, level))
+			{
+				SetCoords(newX, y);
+			}
 		}
 	}
 }
@@ -132,10 +143,39 @@ void Player::MoveSide(Map level)
 void Player::MoveUp(Map& level)
 {
 	SetCoords(x, 0);
-	level = CreateMap(); // Load new chunk
+
+	// Load next chunk
+	level = CreateMap();
+	ResetDamagedTiles();
 }
 
 void Player::Fall()
 {
 	SetCoords(x, y+1);
+}
+
+
+void Player::Dig(Map level, int x, int y)
+{
+	// Locate the tile
+	int tileDamaged = GetDamagedTile(x, y);
+
+	if (tileDamaged == -1)
+	{
+		AddDamagedTile(x, y, GetTileFromPos(x, y, level));
+		tileDamaged = GetDamagedTile(x, y);
+	}
+
+	// Gain Gold (if the tile has any)
+	Tile currentTile = GetTileFromPos(x, y, level);
+	AddGold(currentTile.gold);
+
+	// Damage the tile and remove it from the map if the tile is broken
+	bool IsTileBroken;
+
+	IsTileBroken = DamageTile(tileDamaged);
+	if (IsTileBroken == true)
+	{
+		ChangeTileToAir(level, x, y);
+	}
 }

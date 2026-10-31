@@ -29,7 +29,7 @@ Tile GetTileFromPos(int x, int y, Map level)
 
 bool IsBlockHere(int x, int y, Map level)
 {
-	return GetTileFromPos(x, y, level).name != ' ';
+	return GetTileFromPos(x, y, level).name_Display != ' ';
 }
 
 bool IsBlockWalkable(int x, int y, Map level)
@@ -39,7 +39,7 @@ bool IsBlockWalkable(int x, int y, Map level)
 
 
 
-int GetTileDamaged(int x, int y)
+int GetDamagedTile(int x, int y)
 {
 	for (int i = 0;i < damagedTiles.size();i++)
 	{
@@ -58,12 +58,7 @@ void AddDamagedTile(int x, int y, Tile tile)
 	damagedTiles.back().y = y;
 }
 
-void DamageTile(int tile_id)
-{
-	damagedTiles[tile_id].durability -= 1;
-}
-
-void RemoveDamagedTile(int tile_id)
+bool DamageTile(int tile_id)
 {
 	damagedTiles[tile_id].durability -= 1;
 
@@ -71,10 +66,17 @@ void RemoveDamagedTile(int tile_id)
 	if (damagedTiles[tile_id].durability == 0)
 	{
 		RemoveDamagedTile(tile_id);
+		return true;
 	}
+	return false;
 }
 
 void RemoveDamagedTile(int tile_id)
 {
 	damagedTiles.erase(damagedTiles.begin() + tile_id);
+}
+
+void ResetDamagedTiles()
+{
+	damagedTiles.clear();
 }
